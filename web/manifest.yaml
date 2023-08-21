@@ -9,10 +9,10 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: web
       tier: frontend
-  spec:
+  template:
     metadata:
       labels:
         app: web
@@ -21,3 +21,5 @@ spec:
     - image: saivinaylt/web:k8
       name: web
       containerPort: 80
+
+

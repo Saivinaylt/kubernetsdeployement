@@ -3,23 +3,24 @@ apiVersion: apps/v1
 metadata:
   name: web
   namespace: roboshop
-  labels:
-    app: web
-    tier: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web
-      tier: frontend
+      name: web
+      tier: app
   template:
     metadata:
       labels:
-        app: web
-        tier: frontend
-    containers:
-    - image: saivinaylt/web:k8
-      name: web
-      containerPort: 80
+        name: mongodb
+        tier: DB
+    spec: 
+      containers:
+      - image: saivinaylt/web:k8
+        name: web
+        imagePullPolocy: Always
+
+
+  
 
 

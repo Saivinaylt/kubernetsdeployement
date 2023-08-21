@@ -1,19 +1,27 @@
-kind: Deployement
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: web
+  namespace: roboshop
+  name: web-deployement
+  labels:
+    project: roboshop
+    app: db
+    service: web
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      name: web
-      tier: DB
+      project: roboshop
+      app: db
+      service: web
   template:
     metadata:
       labels:
-        name: web
-        tier: DB
-    spec: 
+        project: roboshop
+        app: db
+        service: web
+    spec:
       containers:
-      - image: saivinaylt/Web:k8
-        name: web
-        imagePullPolocy: Always
+      - name: web
+        imagePullPolicy: Always
+        image: saivinaylt/web:k8

@@ -1,40 +1,50 @@
-kind: Deployement
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: mongodb
   namespace: roboshop
+  name: mongodb-deployement
+  labels:
+    project: roboshop
+    app: db
+    service: mongodb
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      name: mongodb
-      tier: DB
+      project: roboshop
+      app: db
+      service: mongodb
   template:
     metadata:
       labels:
-        name: mongodb
-        tier: DB
-    spec: 
+        project: roboshop
+        app: db
+        service: mongodb
+    spec:
       containers:
-      - image: saivinaylt/mongodb:k8
-        name: mongodb
-        imagePullPolocy: Always
+      - name: mongodb
+        imagePullPolicy: Always
+        image: saivinaylt/mongodb:k8
 
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: mongodbservice
   namespace: roboshop
+  name: mongodb
   labels:
+    project: roboshop
+    app: db
     service: mongodb
-    tier: DB
 spec:
   selector:
-    name: mongodb
-    tier: DB 
+    project: roboshop
+    app: db
+    service: mongodb
   ports:
-  - name: mongodb-port
-    protocol: TCP
-    port: 20107
-    targetPort: 27017  
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+    name: mongo-port 
+
 

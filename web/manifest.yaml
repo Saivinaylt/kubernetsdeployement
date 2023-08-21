@@ -14,6 +14,6 @@ spec:
         tier: DB
     spec: 
       containers:
-      - image: saivinaylt/web:k8
+      - image: saivinaylt/Web:k8
         name: web
         imagePullPolocy: Always

@@ -1,23 +1,50 @@
 apiVersion: apps/v1
-kind: Deployement
+kind: Deployment
 metadata:
-  name: catalogue-deployement
   namespace: roboshop
+  name: catalogue-deployement
   labels:
-    app: catalogue
-    tier: app
+    project: roboshop
+    app: db
+    service: catalogue
 spec:
+  # replicas: 1
   selector:
     matchLabels:
-      app: catalogue
-      tier: app
-    template:
-      metadata:
-        labels:
-          app: catalogue
-          tier: app
-      spec:
-        containers:
-        - image: saivinaylt/catalogue:k8
-          name: catalogue
-          imagePullPolicy: Always
+      project: roboshop
+      app: db
+      service: catalogue
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: db
+        service: catalogue
+    spec:
+      containers:
+      - name: catalogue
+        imagePullPolicy: Always
+        image: saivinaylt/catalogue:k8
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: roboshop
+  name: catalogue
+  labels:
+    project: roboshop
+    app: db
+    service: catalogue
+spec:
+  selector:
+    project: roboshop
+    app: db
+    service: catalogue
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: catalogue-port 
+
+

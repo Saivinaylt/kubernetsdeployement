@@ -1,0 +1,40 @@
+kind: Deployement
+apiVersion: apps/v1
+metadata:
+  name: mongodb
+  namespace: roboshop
+spec:
+  selector:
+    matchLabels:
+      name: mongodb
+      tier: DB
+  template:
+    metadata:
+      labels:
+        name: mongodb
+        tier: DB
+    spec: 
+      containers:
+      - image: saivinaylt/mongodb:k8
+        name: mongodb
+        imagePullPolocy: Always
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongodbservice
+  namespace: roboshop
+  labels:
+    service: mongodb
+    tier: DB
+spec:
+  selector:
+    name: mongodb
+    tier: DB 
+  ports:
+  - name: mongodb-port
+    protocol: TCP
+    port: 20107
+    targetPort: 27017  
+

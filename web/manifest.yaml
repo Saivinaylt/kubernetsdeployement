@@ -2,7 +2,6 @@ kind: Deployement
 apiVersion: apps/v1
 metadata:
   name: web
-  namespace: roboshop
 spec:
   selector:
     matchLabels:

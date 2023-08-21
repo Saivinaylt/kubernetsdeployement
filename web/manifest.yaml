@@ -1,0 +1,23 @@
+kind: Deployement
+apiVersion: apps/v1
+metadata:
+  name: web
+  namespace: roboshop
+  labels:
+    app: web
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: web
+      tier: frontend
+  spec:
+    metadata:
+      labels:
+        app: web
+        tier: frontend
+    containers:
+    - image: saivinaylt/web:k8
+      name: web
+      containerPort: 80

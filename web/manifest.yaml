@@ -4,23 +4,17 @@ metadata:
   name: web
   namespace: roboshop
 spec:
-  replicas: 1
   selector:
     matchLabels:
       name: web
-      tier: app
+      tier: DB
   template:
     metadata:
       labels:
-        name: mongodb
+        name: web
         tier: DB
     spec: 
       containers:
       - image: saivinaylt/web:k8
         name: web
         imagePullPolocy: Always
-
-
-  
-
-

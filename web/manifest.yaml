@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: web
+  namespace: roboshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+      kind: frontend
+  template:
+    metadata:
+      labels:
+        app: web
+        kind: frontend
+    spec:
+      containers:
+      - name: web
+        imagePullPolicy: Always
+        image: saivinaylt/web:k8
+

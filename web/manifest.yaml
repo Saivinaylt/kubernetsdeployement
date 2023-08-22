@@ -1,27 +1,39 @@
+kind: Deployement
 apiVersion: apps/v1
-kind: Deployment
 metadata:
-  namespace: roboshop
-  name: web-deployement
-  labels:
-    project: roboshop
-    app: db
-    service: web
+  name: web
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      project: roboshop
-      app: db
-      service: web
+      name: web
+      tier: DB
   template:
     metadata:
       labels:
-        project: roboshop
-        app: db
-        service: web
-    spec:
+        name: web
+        tier: DB
+    spec: 
       containers:
-      - name: web
-        imagePullPolicy: Always
-        image: saivinaylt/web:k8
+      - image: saivinaylt/Web:k8
+        name: web
+        imagePullPolocy: Alway
+
+---
+kind: Service
+apiVersion: v1
+metadata: 
+  name: webservice
+  namespace: roboshop
+spec:
+  type: LoadBalancer
+  selector:
+    name: web
+    tier: DB
+  ports:
+  - name: webport
+    protocol: TCP
+    port: 80
+    targetPort: 80
+
+
+

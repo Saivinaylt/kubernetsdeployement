@@ -8,7 +8,7 @@ metadata:
     app: db
     service: catalogue
 spec:
-  # replicas: 1
+  replicas: 1
   selector:
     matchLabels:
       project: roboshop

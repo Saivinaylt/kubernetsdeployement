@@ -17,8 +17,9 @@ spec:
     spec: 
       containers:
       - image: saivinaylt/mongodb:k8
+        imagePullPolicy: Always
         name: mongodb
-        imagePullPolocy: Always
+        
 
 ---
 kind: Service

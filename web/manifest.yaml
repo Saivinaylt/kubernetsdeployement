@@ -18,7 +18,6 @@ spec:
       containers:
       - image: saivinaylt/web:k8
         name: web
-        imagePullPolocy: Alway
 
 ---
 kind: Service

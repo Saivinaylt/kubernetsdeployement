@@ -1,9 +1,10 @@
-kind: Deployement
+kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: mongodb
   namespace: roboshop
 spec:
+  replicas: 1
   selector:
     matchLabels:
       name: mongodb

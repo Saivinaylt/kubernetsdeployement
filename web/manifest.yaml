@@ -1,6 +1,7 @@
 kind: Deployement
 apiVersion: apps/v1
 metadata:
+  namespace: roboshop
   name: web
 spec:
   selector:

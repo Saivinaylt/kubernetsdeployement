@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: roboshop
+  name: user-deployement
+  labels:
+    project: roboshop
+    app: db
+    service: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      app: db
+      service: user
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: db
+        service: user
+    spec:
+      containers:
+      - name: user
+        imagePullPolicy: Always
+        image: saivinaylt/user:k8
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: roboshop
+  name: user
+  labels:
+    project: roboshop
+    app: db
+    service: user
+spec:
+  selector:
+    project: roboshop
+    app: db
+    service: user
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: user-port 
+
+

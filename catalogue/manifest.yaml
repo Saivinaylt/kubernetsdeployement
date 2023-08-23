@@ -24,7 +24,7 @@ spec:
       containers:
       - name: catalogue
         imagePullPolicy: Always
-        image: saivinaylt/catalogue:k8
+        image: saivinaylt/catalogue:k8 .
 
 ---
 apiVersion: v1
